@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "CreatorHub Audit Assistant",
+  "version": "1.5.2",
+  "description": "Step through Web/Forum submissions, preview each content URL, and approve or reject by click/keys, head gesture or voice.",
+  "permissions": ["storage", "tabs", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://influncergalgotias.vercel.app/admin/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["sensor.html", "sensor.js", "gesture.js", "commands.js", "vendor/*", "vendor/wasm/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
+}
